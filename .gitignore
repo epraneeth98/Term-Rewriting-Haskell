@@ -1,0 +1,4 @@
+.stack-work/
+term-rewriter.cabal
+*~
+*.lock
