@@ -9,15 +9,15 @@ find x1 (_:xs) = find x1 xs
 
 -- we return list of Substitution. why? (Failure!)
 unify :: Term -> Term -> [Substitution]
-unify (Var x) (Var y) | x == y    = [makeSubst x (Var y)]
-                      | otherwise = []
+unify (Var x) (Var y) | x == y    = [identity]
+                      | otherwise = [makeSubst x (Var y)]
 
 -- have to do occurs check, and look for already bound variables
 -- since x does not unify with f(x)
 unify (Var x) term     = (bindVar x term)
 unify term    (Var y)  = (bindVar y term)
 unify (Fn f fargs) (Fn g gargs) | f==g = (listUnify fargs gargs)
-								| otherwise = []  
+                                | otherwise = []  
 
 -- bindVar v t  checks if
 -- var v occurs in t, else binds v to t
