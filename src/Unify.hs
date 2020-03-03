@@ -35,4 +35,6 @@ listUnify [] (r:rs) = []
 listUnify (t:ts) [] = []
 -- unify t with r with some u1,
 -- applySubst to ts' and rs' where ts' <- u1 ts and rs' <- u1 rs
-listUnify (t:ts) (r:rs) = map (compose head) (listUnify (map (applySubst head) ts) (map (applySubst head) rs)) where (head:_) = (unify t r)  
+listUnify (t:ts) (r:rs) | null (unify t r) = []
+						| otherwise = map (compose head) (listUnify (map (applySubst head) ts) (map (applySubst head) rs)) 
+							where (head:_) = (unify t r)  
