@@ -30,7 +30,7 @@ applyOnce :: [Rule] -> Term -> [Term]
 applyOnce [] term = []
 applyOnce (r:rs) term | null (unify (lhs r) term) = applyOnce rs term
 					  | otherwise  = [(applySubst u (rhs r))]
-					  where (u:_) = (unify term (lhs r))
+					  where (u:_) = (unify (lhs r) term)
 
 -- This is a hint, a function that can recusively apply rules on a term AND it's
 -- sub-terms, and return their normal forms.

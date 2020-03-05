@@ -16,7 +16,7 @@ unify (Var x) (Var y) | x == y    = [identity]
 -- since x does not unify with f(x)
 unify (Var x) term     = (bindVar x term)
 unify term    (Var y)  = (bindVar y term)
-unify (Fn f fargs) (Fn g gargs) | f==g = (listUnify fargs gargs)
+unify (Fn f fargs) (Fn g gargs) | f==g && ((length fargs) == (length gargs))= (listUnify fargs gargs)
                                 | otherwise = []  
 
 -- bindVar v t  checks if
